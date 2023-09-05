@@ -12,6 +12,8 @@ void PlayerClass::Initialize()
 	playerMapX = 0;
 	playerMapY = 0;
 
+	correctFlag = false;
+
 	player = Novice::LoadTexture("./images/player.png");
 }
 
@@ -47,6 +49,7 @@ void PlayerClass::Move()
 		{
 			playerPosY -= playerSpeed;
 		}
+		//シロップを動かす処理
 		if (map[playerMapY][playerMapX] == A || )
 		{
 			if (map[playerMapY - 1][playerMapX] == YUKA)
@@ -75,6 +78,7 @@ void PlayerClass::Move()
 		{
 			playerPosX -= playerSpeed;
 		}
+		//シロップを動かす処理
 		if (map[playerMapY][playerMapX] == SYRUP)
 		{
 			if (map[playerMapY][playerMapX - 1] == YUKA)
@@ -103,6 +107,7 @@ void PlayerClass::Move()
 		{
 			playerPosX += playerSpeed;
 		}
+		//シロップを動かす処理
 		if (map[playerMapY][playerMapX] == SYRUP)
 		{
 			if (map[playerMapY][playerMapX + 1] == YUKA)
@@ -142,4 +147,17 @@ void PlayerClass::Move()
 			}
 		}
 	}
+}
+
+// 正解の時
+void PlayerClass::Correct()
+{
+	//　goalから次に行けるflagを立てる
+
+}
+
+//　正解じゃない時
+void PlayerClass::Wrong()
+{
+	//　ライフが一つなくなる
 }

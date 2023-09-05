@@ -47,6 +47,18 @@ public:
 
 	void Move();
 
+	void Correct();
+
+	void Wrong();
+
+	int GetPlayerPosX() { playerPosX; }
+	int GetPlayerPosY() { playerPosY; }
+
+	int GetPlayerMapX() { playerMapX; }
+	int GetPlayerMapY() { playerMapY; }
+
+	bool SetAnswerFlag(bool value) { correctFlag = value };
+
 private:
 	int playerPosX;
 	int playerPosY;
@@ -58,6 +70,8 @@ private:
 	int playerMapX;
 	int playerMapY;
 
+	bool correctFlag;
+
 	int player;
-	const int KBlockSize;
+	const int KBlockSize = 32;
 };
