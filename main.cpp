@@ -184,42 +184,41 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		{
 		case TITLE:
 
-			//初期化------------------------------------------------------------
-			goalTimer = 60;
-			deathTimer = 60;
-			playerPosY = 576;
-			playerSpeed = KBlockSize;
-			mapClass.Initialize();
-			mapClass.stage1();
-			//--------------------------------------------------------------------
+		//初期化------------------------------------------------------------
+		goalTimer = 60;
+		deathTimer = 60;
+		playerPosY = 576;
+		playerSpeed = KBlockSize;
+		mapClass.Initialize();
+		mapClass.stage1();
+		//--------------------------------------------------------------------
 			// SPACEを押したらSTAGE1に移動
 
-			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0)
-			{
-				sceneNo = STAGE1;
-			}
+		if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0)
+		{
+			sceneNo = STAGE1;
+		}
 
 			break;
 
 		case STAGE1:
 
 			//マップ情報-----------------------------------------------------------------------------------
-			playerMapX = playerPosX / KBlockSize;//map[x][]
-			playerMapY = playerPosY / KBlockSize;//map[][y]
+		playerMapX = playerPosX / KBlockSize;//map[x][]
+		playerMapY = playerPosY / KBlockSize;//map[][y]
+		mapClass.Update();
 
-			mapClass.Update();
-
-			//リスタート
-			if (keys[DIK_R] && preKeys[DIK_R] == 0)
-			{
-				goalTimer = 60;//初期化
-				deathTimer = 60;
-				playerPosX = 13 * KBlockSize;//プレイヤーの位置
-				playerPosY = 576;
-				playerSpeed = KBlockSize;
-				// map初期化
-				mapClass.stage1();
-			}
+		//リスタート
+		if (keys[DIK_R] && preKeys[DIK_R] == 0)
+		{
+			goalTimer = 60;//初期化
+			deathTimer = 60;
+			playerPosX = 13 * KBlockSize;//プレイヤーの位置
+			playerPosY = 576;
+			playerSpeed = KBlockSize;
+			// map初期化
+			mapClass.stage1();
+		}
 
 			//プレイヤー移動-------------------------------------------------------------------------------
 		
@@ -228,146 +227,141 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 
 		case STAGE2:
-			//マップ情報-----------------------------------------------------------------------------------
-			playerMapX = playerPosX / KBlockSize;//map[x][]
-			playerMapY = playerPosY / KBlockSize;//map[][y]
-			mapClass.Update();
-			//リスタート
-			if (keys[DIK_R] && preKeys[DIK_R] == 0)
-			{
-				goalTimer = 60;//初期化
-				deathTimer = 60;
-				playerPosX = 1 * KBlockSize;//プレイヤーの位置
-				playerPosY = 20 * KBlockSize;
-				playerSpeed = KBlockSize;
-				mapClass.stage2();
-			}
+		//マップ情報-----------------------------------------------------------------------------------
+		playerMapX = playerPosX / KBlockSize;//map[x][]
+		playerMapY = playerPosY / KBlockSize;//map[][y]
+		mapClass.Update();
+		//リスタート
+		if (keys[DIK_R] && preKeys[DIK_R] == 0)
+		{
+			goalTimer = 60;//初期化
+			deathTimer = 60;
+			playerPosX = 1 * KBlockSize;//プレイヤーの位置
+			playerPosY = 20 * KBlockSize;
+			playerSpeed = KBlockSize;
+			mapClass.stage2();
+		}
 
-			//プレイヤー移動-------------------------------------------------------------------------------
+		//プレイヤー移動-------------------------------------------------------------------------------
 		
 
-			//状態変化--------------------------------------------------------------------------------------------------
+		//状態変化--------------------------------------------------------------------------------------------------
 			
 
 
-			//ゴール条件---------------------------------
+		//ゴール条件---------------------------------
 		
-			break;
+		break;
 
 		case STAGE3:
-			//マップ情報-----------------------------------------------------------------------------------
-			playerMapX = playerPosX / KBlockSize;//map[x][]
-			playerMapY = playerPosY / KBlockSize;//map[][y]
+		//マップ情報-----------------------------------------------------------------------------------
+		playerMapX = playerPosX / KBlockSize;//map[x][]
+		playerMapY = playerPosY / KBlockSize;//map[][y]
 
-			mapClass.Update();
-			//リスタート
-			if (keys[DIK_R] && preKeys[DIK_R] == 0)
+		mapClass.Update();
+		//リスタート
+		if (keys[DIK_R] && preKeys[DIK_R] == 0)
+		{
+			goalTimer = 60;//初期化
+			deathTimer = 60;
+			playerPosX = 12 * KBlockSize;//プレイヤーの位置
+			playerPosY = 18 * KBlockSize;
+			playerSpeed = KBlockSize;
+			mapClass.stage3();
+		}
+
+		//プレイヤー移動-------------------------------------------------------------------------------
+
+
+		// goalに入ったらgoalFlagがtrueになって次に移動
+		if (map[playerMapY][playerMapX] == GOAL)
+		{
+			goalFlag == true;
+			if (goalFlag == true)
 			{
-				goalTimer = 60;//初期化
-				deathTimer = 60;
-				playerPosX = 12 * KBlockSize;//プレイヤーの位置
-				playerPosY = 18 * KBlockSize;
-				playerSpeed = KBlockSize;
-				mapClass.stage3();
-			}
-
-			//プレイヤー移動-------------------------------------------------------------------------------
-			
-=======
-
-			// goalに入ったらgoalFlagがtrueになって次に移動
-				if (map[playerMapY][playerMapX] == GOAL)
-				{
-					goalFlag == true;
-					if (goalFlag == true)
-					{
-						goalTimer--;
-						playerSpeed = 0;
-						if (goalTimer == 0)
-						{
-							sceneNo = STAGE2;
-						}
-					｝
-
-				}
-			
-
-
-			// gameOverFlagがtrueになればGAMEOVERに移動する
-			if (gameOverFlag == true)
-			{
-				deathTimer--;
-					playerSpeed = 0;
-					if (deathTimer == 0)
-					{
-						sceneNo = GAMEOVER;
-					}
-			}
-
-			break;
-
-		case STAGE2:
-			
-			// goalに入ったらgoalFlagがtrueになって次に移動
-			if (map[playerMapY][playerMapX] == GOAL)
-			{
-				goalFlag == true;
-				if (goalFlag == true)
-				{
-					goalTimer--;
-					playerSpeed = 0;
-					if (goalTimer == 0)
-					{
-						sceneNo = STAGE2;
-					}
-					｝
-
-				}
-
-			// gameOverFlagがtrueになればGAMEOVERに移動する
-			if (gameOverFlag == true)
-			{
-				deathTimer--;
+				goalTimer--;
 				playerSpeed = 0;
-				if (deathTimer == 0)
+				if (goalTimer == 0)
 				{
-					sceneNo = GAMEOVER;
+					sceneNo = STAGE2;
 				}
 			}
 
-			break;
+		}
+			
 
-		case STAGE3:
-
-			// goalに入ったらgoalFlagがtrueになって次に移動
-			if (map[playerMapY][playerMapX] == GOAL)
-			{
-				goalFlag == true;
-				if (goalFlag == true)
-				{
-					goalTimer--;
-					playerSpeed = 0;
-					if (goalTimer == 0)
-					{
-						sceneNo = STAGE2;
-					}
-					｝
-
-				}
 
 			// gameOverFlagがtrueになればGAMEOVERに移動する
-			if (gameOverFlag == true)
+		if (gameOverFlag == true)
+		{
+			deathTimer--;
+			playerSpeed = 0;
+			if (deathTimer == 0)
 			{
-				deathTimer--;
-				playerSpeed = 0;
-				if (deathTimer == 0)
-				{
-					sceneNo = GAMEOVER;
-				}
+				sceneNo = GAMEOVER;
 			}
+		}
+
+	
+
+			
+			// goalに入ったらgoalFlagがtrueになって次に移動
+		if (map[playerMapY][playerMapX] == GOAL)
+		{
+			goalFlag == true;
+			if (goalFlag == true)
+			{
+				goalTimer--;
+				playerSpeed = 0;
+				if (goalTimer == 0)
+				{
+					sceneNo = STAGE2;
+				}
+
+			}
+		}
+			// gameOverFlagがtrueになればGAMEOVERに移動する
+		if (gameOverFlag == true)
+		{
+			deathTimer--;
+			playerSpeed = 0;
+			if (deathTimer == 0)
+			{
+				sceneNo = GAMEOVER;
+			}
+		}
 
 
-			break;
+
+			// goalに入ったらgoalFlagがtrueになって次に移動
+		if (map[playerMapY][playerMapX] == GOAL)
+		{
+			goalFlag == true;
+			if (goalFlag == true)
+			{
+				goalTimer--;
+				playerSpeed = 0;
+				if (goalTimer == 0)
+				{
+					sceneNo = STAGE2;
+				}
+
+
+			}
+		}
+				// gameOverFlagがtrueになればGAMEOVERに移動する
+		if (gameOverFlag == true)
+		{
+			deathTimer--;
+			playerSpeed = 0;
+			if (deathTimer == 0)
+			{
+				sceneNo = GAMEOVER;
+			}
+		}
+
+
+		break;
 
 		case GAMECLEAR:
 			// SPACEを押したらTITLEに移動
