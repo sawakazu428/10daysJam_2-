@@ -145,7 +145,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int di = Novice::LoadTexture("./images/di.png");
 	int du = Novice::LoadTexture("./images/du.png");
 	int de = Novice::LoadTexture("./images/de.png");
-	int do = Novice::LoadTexture("./images/do.png");
+	int doo = Novice::LoadTexture("./images/do.png");
 
 	int ba = Novice::LoadTexture("./images/ba.png");
 	int bi = Novice::LoadTexture("./images/bi.png");
@@ -183,15 +183,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		switch (sceneNo)
 		{
 		case TITLE:
-
-			//初期化------------------------------------------------------------
-			goalTimer = 60;
-			deathTimer = 60;
-			playerPosY = 576;
-			playerSpeed = KBlockSize;
-			mapClass.Initialize();
-			mapClass.stage1();
-			//--------------------------------------------------------------------
 			// SPACEを押したらSTAGE1に移動
 
 			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0)
@@ -201,111 +192,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			break;
 
-		case STAGE1:
-
-			//マップ情報-----------------------------------------------------------------------------------
-			playerMapX = playerPosX / KBlockSize;//map[x][]
-			playerMapY = playerPosY / KBlockSize;//map[][y]
-
-			mapClass.Update();
-
-			//リスタート
-			if (keys[DIK_R] && preKeys[DIK_R] == 0)
-			{
-				goalTimer = 60;//初期化
-				deathTimer = 60;
-				playerPosX = 13 * KBlockSize;//プレイヤーの位置
-				playerPosY = 576;
-				playerSpeed = KBlockSize;
-				// map初期化
-				mapClass.stage1();
-			}
-
-			//プレイヤー移動-------------------------------------------------------------------------------
-		
-
-			
+		case STAGE1:		
 			break;
-
-		case STAGE2:
-			//マップ情報-----------------------------------------------------------------------------------
-			playerMapX = playerPosX / KBlockSize;//map[x][]
-			playerMapY = playerPosY / KBlockSize;//map[][y]
-			mapClass.Update();
-			//リスタート
-			if (keys[DIK_R] && preKeys[DIK_R] == 0)
-			{
-				goalTimer = 60;//初期化
-				deathTimer = 60;
-				playerPosX = 1 * KBlockSize;//プレイヤーの位置
-				playerPosY = 20 * KBlockSize;
-				playerSpeed = KBlockSize;
-				mapClass.stage2();
-			}
-
-			//プレイヤー移動-------------------------------------------------------------------------------
-		
-
-			//状態変化--------------------------------------------------------------------------------------------------
-			
-
-
-			//ゴール条件---------------------------------
-		
-			break;
-
-		case STAGE3:
-			//マップ情報-----------------------------------------------------------------------------------
-			playerMapX = playerPosX / KBlockSize;//map[x][]
-			playerMapY = playerPosY / KBlockSize;//map[][y]
-
-			mapClass.Update();
-			//リスタート
-			if (keys[DIK_R] && preKeys[DIK_R] == 0)
-			{
-				goalTimer = 60;//初期化
-				deathTimer = 60;
-				playerPosX = 12 * KBlockSize;//プレイヤーの位置
-				playerPosY = 18 * KBlockSize;
-				playerSpeed = KBlockSize;
-				mapClass.stage3();
-			}
-
-			//プレイヤー移動-------------------------------------------------------------------------------
-			
-=======
-
-			// goalに入ったらgoalFlagがtrueになって次に移動
-				if (map[playerMapY][playerMapX] == GOAL)
-				{
-					goalFlag == true;
-					if (goalFlag == true)
-					{
-						goalTimer--;
-						playerSpeed = 0;
-						if (goalTimer == 0)
-						{
-							sceneNo = STAGE2;
-						}
-					｝
-
-				}
-			
-
-
-			// gameOverFlagがtrueになればGAMEOVERに移動する
-			if (gameOverFlag == true)
-			{
-				deathTimer--;
-					playerSpeed = 0;
-					if (deathTimer == 0)
-					{
-						sceneNo = GAMEOVER;
-					}
-			}
-
-			break;
-
 		case STAGE2:
 			
 			// goalに入ったらgoalFlagがtrueになって次に移動
@@ -401,9 +289,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			Novice::DrawBox(0, 0, 1280, 720, 0, BLACK, kFillModeSolid);
 
-			
-
-	
 			// Map Classに移動する STAGE2, STAGE3 にもコピー
 			for (int y = 0; y < mapCountY; y++)
 			{
@@ -447,7 +332,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					if (map[y][x] == KE)
 					{
 						Novice::DrawSprite(x * KBlockSize, y * KBlockSize, ke, 1, 1, 0, WHITE);
-					]
+					}
 					if (map[y][x] == KO)
 					{
 						Novice::DrawSprite(x * KBlockSize, y * KBlockSize, ko, 1, 1, 0, WHITE);
@@ -676,7 +561,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					}
 					if (map[y][x] == DO)
 					{
-						Novice::DrawSprite(x * KBlockSize, y * KBlockSize, do, 1, 1, 0, WHITE);
+						Novice::DrawSprite(x * KBlockSize, y * KBlockSize, doo, 1, 1, 0, WHITE);
 					}
 
 					//ば

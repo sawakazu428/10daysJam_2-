@@ -1,5 +1,5 @@
 #pragma once
-
+#include <Novice.h>
 enum HIRAGANA
 {
 	A, I, U, E, O,

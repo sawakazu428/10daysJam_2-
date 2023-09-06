@@ -1,5 +1,6 @@
 #include "PlayerClass.h"
 
+
 void PlayerClass::Initialize()
 {
 	playerPosX = 13 * KBlockSize;
