@@ -1,4 +1,5 @@
 #include <Novice.h>
+#include "MapClass.h"
 
 const char kWindowTitle[] = "GC2B_04_サワダカズキ";
 
@@ -61,7 +62,15 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
 	char preKeys[256] = {0};
-	//画像読み込み-----------------------------------------------------------
+	//画像読み込み-----------------------------------------------------
+
+	
+	MapClass mapClass;
+
+	mapClass.Initialize();
+	mapClass.stage1();
+	mapClass.stage2();
+	mapClass.stage3();
 
 	//Map Classに移動する
 	int a = Novice::LoadTexture("./images/a.png");
@@ -174,7 +183,17 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		switch (sceneNo)
 		{
 		case TITLE:
+
+			//初期化------------------------------------------------------------
+			goalTimer = 60;
+			deathTimer = 60;
+			playerPosY = 576;
+			playerSpeed = KBlockSize;
+			mapClass.Initialize();
+			mapClass.stage1();
+			//--------------------------------------------------------------------
 			// SPACEを押したらSTAGE1に移動
+
 			if (keys[DIK_SPACE] && preKeys[DIK_SPACE] == 0)
 			{
 				sceneNo = STAGE1;
@@ -183,6 +202,78 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			break;
 
 		case STAGE1:
+
+			//マップ情報-----------------------------------------------------------------------------------
+			playerMapX = playerPosX / KBlockSize;//map[x][]
+			playerMapY = playerPosY / KBlockSize;//map[][y]
+
+			mapClass.Update();
+
+			//リスタート
+			if (keys[DIK_R] && preKeys[DIK_R] == 0)
+			{
+				goalTimer = 60;//初期化
+				deathTimer = 60;
+				playerPosX = 13 * KBlockSize;//プレイヤーの位置
+				playerPosY = 576;
+				playerSpeed = KBlockSize;
+				// map初期化
+				mapClass.stage1();
+			}
+
+			//プレイヤー移動-------------------------------------------------------------------------------
+		
+
+			
+			break;
+
+		case STAGE2:
+			//マップ情報-----------------------------------------------------------------------------------
+			playerMapX = playerPosX / KBlockSize;//map[x][]
+			playerMapY = playerPosY / KBlockSize;//map[][y]
+			mapClass.Update();
+			//リスタート
+			if (keys[DIK_R] && preKeys[DIK_R] == 0)
+			{
+				goalTimer = 60;//初期化
+				deathTimer = 60;
+				playerPosX = 1 * KBlockSize;//プレイヤーの位置
+				playerPosY = 20 * KBlockSize;
+				playerSpeed = KBlockSize;
+				mapClass.stage2();
+			}
+
+			//プレイヤー移動-------------------------------------------------------------------------------
+		
+
+			//状態変化--------------------------------------------------------------------------------------------------
+			
+
+
+			//ゴール条件---------------------------------
+		
+			break;
+
+		case STAGE3:
+			//マップ情報-----------------------------------------------------------------------------------
+			playerMapX = playerPosX / KBlockSize;//map[x][]
+			playerMapY = playerPosY / KBlockSize;//map[][y]
+
+			mapClass.Update();
+			//リスタート
+			if (keys[DIK_R] && preKeys[DIK_R] == 0)
+			{
+				goalTimer = 60;//初期化
+				deathTimer = 60;
+				playerPosX = 12 * KBlockSize;//プレイヤーの位置
+				playerPosY = 18 * KBlockSize;
+				playerSpeed = KBlockSize;
+				mapClass.stage3();
+			}
+
+			//プレイヤー移動-------------------------------------------------------------------------------
+			
+=======
 
 			// goalに入ったらgoalFlagがtrueになって次に移動
 				if (map[playerMapY][playerMapX] == GOAL)
@@ -275,6 +366,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 				}
 			}
 
+
 			break;
 
 		case GAMECLEAR:
@@ -309,6 +401,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 			Novice::DrawBox(0, 0, 1280, 720, 0, BLACK, kFillModeSolid);
 
+			
+
+	
 			// Map Classに移動する STAGE2, STAGE3 にもコピー
 			for (int y = 0; y < mapCountY; y++)
 			{
@@ -629,6 +724,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 					}
 				}
 			}
+
 			break;
 			
 		case STAGE2:
