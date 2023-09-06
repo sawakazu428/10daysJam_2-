@@ -1,5 +1,4 @@
 #pragma once
-
 enum HIRAGANA
 {
 	A, I, U, E, O,
@@ -57,8 +56,6 @@ public:
 	int GetPlayerMapX() { playerMapX; }
 	int GetPlayerMapY() { playerMapY; }
 
-	bool SetAnswerFlag(bool value) { correctFlag = value };
-
 private:
 	int playerPosX;
 	int playerPosY;
@@ -69,8 +66,6 @@ private:
 	int playerTmpY;
 	int playerMapX;
 	int playerMapY;
-
-	bool correctFlag;
 
 	int player;
 	const int KBlockSize = 32;
