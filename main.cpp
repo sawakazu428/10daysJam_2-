@@ -1,5 +1,6 @@
 #include <Novice.h>
 #include "MapClass.h"
+#include "PlayerClass.h"
 
 const char kWindowTitle[] = "GC2B_04_サワダカズキ";
 
@@ -71,6 +72,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	mapClass.stage1();
 	mapClass.stage2();
 	mapClass.stage3();
+	PlayerClass player;
+
 
 	//Map Classに移動する
 	int a = Novice::LoadTexture("./images/a.png");
@@ -145,7 +148,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	int di = Novice::LoadTexture("./images/di.png");
 	int du = Novice::LoadTexture("./images/du.png");
 	int de = Novice::LoadTexture("./images/de.png");
-	int do = Novice::LoadTexture("./images/do.png");
+	int doo = Novice::LoadTexture("./images/do.png");
 
 	int ba = Novice::LoadTexture("./images/ba.png");
 	int bi = Novice::LoadTexture("./images/bi.png");
